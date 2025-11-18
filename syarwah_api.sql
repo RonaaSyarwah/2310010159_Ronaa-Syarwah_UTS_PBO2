@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Nov 14, 2025 at 01:36 PM
+-- Generation Time: Nov 18, 2025 at 02:39 PM
 -- Server version: 8.0.30
 -- PHP Version: 8.3.27
 
@@ -29,28 +29,33 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `agenda` (
   `id` int NOT NULL,
+  `is_done` enum('true','false') NOT NULL DEFAULT 'false',
   `keterangan` text,
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `title` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `agenda`
 --
 
-INSERT INTO `agenda` (`id`, `keterangan`, `created_at`, `updated_at`) VALUES
-(1, 'Rapat koordinasi mingguan dengan seluruh divisi', '2025-11-14 13:17:24', '2025-11-14 13:17:24'),
-(2, 'Persiapan laporan keuangan bulan ini', '2025-11-14 13:17:24', '2025-11-14 13:17:24'),
-(3, 'Survey lokasi untuk acara bakti sosial', '2025-11-14 13:17:24', '2025-11-14 13:17:24'),
-(4, 'Diskusi pengembangan aplikasi internal', '2025-11-14 13:17:24', '2025-11-14 13:17:24'),
-(5, 'Pelatihan karyawan baru mengenai SOP perusahaan', '2025-11-14 13:17:24', '2025-11-14 13:17:24'),
-(6, 'Maintenance server dan pengecekan jaringan', '2025-11-14 13:17:24', '2025-11-14 13:17:24'),
-(7, 'Meeting dengan klien untuk presentasi proyek baru', '2025-11-14 13:17:24', '2025-11-14 13:17:24'),
-(8, 'Pengumpulan data untuk audit internal', '2025-11-14 13:17:24', '2025-11-14 13:17:24'),
-(9, 'Review kinerja bulanan setiap departemen', '2025-11-14 13:17:24', '2025-11-14 13:17:24'),
-(10, 'Penyusunan proposal kegiatan tahunan', '2025-11-14 13:17:24', '2025-11-14 13:17:24'),
-(11, NULL, '2025-11-14 05:18:08', '2025-11-14 05:18:08'),
-(12, NULL, '2025-11-14 05:18:49', '2025-11-14 05:18:49');
+INSERT INTO `agenda` (`id`, `is_done`, `keterangan`, `created_at`, `updated_at`, `title`) VALUES
+(2, 'false', 'Persiapan laporan keuangan bulan ini', '2025-11-14 13:17:24', '2025-11-14 13:17:24', NULL),
+(3, 'false', 'Survey lokasi untuk acara bakti sosial', '2025-11-14 13:17:24', '2025-11-14 13:17:24', NULL),
+(4, 'false', 'Diskusi pengembangan aplikasi internal', '2025-11-14 13:17:24', '2025-11-14 13:17:24', NULL),
+(5, 'false', 'Pelatihan karyawan baru mengenai SOP perusahaan', '2025-11-14 13:17:24', '2025-11-14 13:17:24', NULL),
+(6, 'false', 'Maintenance server dan pengecekan jaringan', '2025-11-14 13:17:24', '2025-11-14 13:17:24', NULL),
+(7, 'false', 'Meeting dengan klien untuk presentasi proyek baru', '2025-11-14 13:17:24', '2025-11-14 13:17:24', NULL),
+(8, 'false', 'Pengumpulan data untuk audit internal', '2025-11-14 13:17:24', '2025-11-14 13:17:24', NULL),
+(9, 'false', 'Review kinerja bulanan setiap departemen', '2025-11-14 13:17:24', '2025-11-14 13:17:24', NULL),
+(10, 'false', 'Penyusunan proposal kegiatan tahunan', '2025-11-14 13:17:24', '2025-11-14 13:17:24', NULL),
+(11, 'false', NULL, '2025-11-14 05:18:08', '2025-11-14 05:18:08', NULL),
+(12, 'false', NULL, '2025-11-14 05:18:49', '2025-11-14 05:18:49', NULL),
+(13, 'false', NULL, '2025-11-18 03:20:43', '2025-11-18 03:20:43', NULL),
+(14, 'false', NULL, '2025-11-18 03:33:59', '2025-11-18 03:33:59', NULL),
+(15, 'false', NULL, '2025-11-18 03:36:24', '2025-11-18 03:36:24', NULL),
+(16, 'false', NULL, '2025-11-18 03:37:18', '2025-11-18 03:37:18', 'Belajar Flutter');
 
 -- --------------------------------------------------------
 
@@ -153,7 +158,11 @@ CREATE TABLE `migrations` (
 INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (1, '0001_01_01_000000_create_users_table', 1),
 (2, '0001_01_01_000001_create_cache_table', 1),
-(3, '0001_01_01_000002_create_jobs_table', 1);
+(3, '0001_01_01_000002_create_jobs_table', 1),
+(4, '2025_11_14_122829_create_personal_access_tokens_table', 2),
+(5, '2025_11_18_112437_add_title_to_agenda_table--table=agenda', 2),
+(6, '2025_11_18_135527_add_is_done_to_agenda_table', 3),
+(7, '2025_11_18_142615_add_is_done_to_agenda_table', 4);
 
 -- --------------------------------------------------------
 
@@ -165,6 +174,25 @@ CREATE TABLE `password_reset_tokens` (
   `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `token` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `personal_access_tokens`
+--
+
+CREATE TABLE `personal_access_tokens` (
+  `id` bigint UNSIGNED NOT NULL,
+  `tokenable_type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `tokenable_id` bigint UNSIGNED NOT NULL,
+  `name` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `token` varchar(64) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `abilities` text COLLATE utf8mb4_unicode_ci,
+  `last_used_at` timestamp NULL DEFAULT NULL,
+  `expires_at` timestamp NULL DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -254,6 +282,15 @@ ALTER TABLE `password_reset_tokens`
   ADD PRIMARY KEY (`email`);
 
 --
+-- Indexes for table `personal_access_tokens`
+--
+ALTER TABLE `personal_access_tokens`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `personal_access_tokens_token_unique` (`token`),
+  ADD KEY `personal_access_tokens_tokenable_type_tokenable_id_index` (`tokenable_type`,`tokenable_id`),
+  ADD KEY `personal_access_tokens_expires_at_index` (`expires_at`);
+
+--
 -- Indexes for table `sessions`
 --
 ALTER TABLE `sessions`
@@ -276,7 +313,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `agenda`
 --
 ALTER TABLE `agenda`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `failed_jobs`
@@ -294,7 +331,13 @@ ALTER TABLE `jobs`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT for table `personal_access_tokens`
+--
+ALTER TABLE `personal_access_tokens`
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `users`
